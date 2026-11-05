@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Mirada Etnográfica: Detrás de la Pizarra | Grupo 2</title>
+    <!-- Tipografías temáticas: Tiza, Máquina de escribir y Texto limpio -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Nunito:wght@400;600;800&family=Patrick+Hand&family=Special+Elite&display=swap" rel="stylesheet">
+    <!-- Ruta al archivo CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- API oficial de YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR DE NAVEGACIÓN -->
+    <header class="top-bar">
+        <div class="brand">
+            <span class="badge-grupo">GRUPO 2</span>
+            <span class="brand-title">Análisis Psicosocial: <em>Detrás de la Pizarra</em></span>
+        </div>
+        <nav class="step-nav">
+            <button id="nav-step-1" class="nav-btn active" onclick="irAPantalla('intro-screen', 1)">1. Expediente Inicial</button>
+            <button id="nav-step-2" class="nav-btn" onclick="irAPantalla('video-screen', 2)">2. Aula y Video Análisis</button>
+            <button id="nav-step-3" class="nav-btn" onclick="irAPantalla('intervencion-screen', 3)">3. Intervención y APA 7</button>
+        </nav>
+    </header>
+
+    <!-- =================================================================
+         PANTALLA 1: INTRODUCCIÓN INTERACTIVA (EL EXPEDIENTE ESCOLAR)
+         ================================================================= -->
+    <main id="intro-screen" class="screen">
+        <div class="desk-container">
+            <div class="manila-folder">
+                <div class="folder-tab">CONFIDENCIAL - CASO: ESCUELA SIN NOMBRE</div>
+                
+                <div class="folder-header">
+                    <h1>La Mirada Etnográfica: Análisis de Sesgos y Atribuciones</h1>
+                    <p class="subtitle">Revisa los 3 documentos del expediente para desbloquear el análisis audiovisual.</p>
+                </div>
+
+                <!-- Pestañas del expediente -->
+                <div class="folder-tabs-nav">
+                    <button id="tab-btn-1" class="paper-tab active" onclick="leerPestana(1)">
+                        📌 1. Equipo Investigador
+                    </button>
+                    <button id="tab-btn-2" class="paper-tab" onclick="leerPestana(2)">
+                        🏚️ 2. Contexto del Caso
+                    </button>
+                    <button id="tab-btn-3" class="paper-tab" onclick="leerPestana(3)">
+                        🧠 3. Problemática y Sesgos
+                    </button>
+                </div>
+
+                <!-- Hoja de papel interna donde cambia el contenido -->
+                <div class="lined-paper">
+                    <div id="tab-content-area">
+                        <!-- El contenido se carga dinámicamente desde app.js -->
+                    </div>
+                </div>
+
+                <!-- Barra de progreso de lectura y botón de acceso -->
+                <div class="folder-footer">
+                    <span id="progreso-lectura" class="stamp-status">Documentos revisados: 1 de 3</span>
+                    <button id="btn-iniciar" class="btn-chalkboard hidden" onclick="iniciarVideo()">
+                        Ingresar al Aula y Reproducir Video ▶
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- =================================================================
+         PANTALLA 2: EL AULA (PIZARRA INTERACTIVA + VIDEO DE 10 MINUTOS)
+         ================================================================= -->
+    <section id="video-screen" class="screen hidden">
+        <div class="classroom-wrapper">
+            
+            <div class="chalkboard-frame">
+                <div class="chalkboard-surface">
+                    <h2 class="chalk-title">Analistas de Sesgos y Atribuciones (Efecto Pigmalión)</h2>
+                    <p class="chalk-subtitle">Las tarjetas interactivas se desplegarán automáticamente en los minutos clave del análisis.</p>
+                    
+                    <!-- Contenedor del Reproductor de YouTube -->
+                    <div class="video-container">
+                        <div id="player"></div>
+                    </div>
+
+                    <!-- Indicador de tiempo y controles manuales de apoyo -->
+                    <div class="chalk-controls">
+                        <div class="time-tracker">
+                            ⏱️ Tiempo transcurrido: <span id="reloj-video">00:00</span>
+                        </div>
+                        <div class="manual-triggers">
+                            <span>Vista rápida de recursos:</span>
+                            <button class="chalk-btn-small" onclick="mostrarPopUpYPausar('modal-atribucion')">Ver Error de Atribución</button>
+                            <button class="chalk-btn-small" onclick="mostrarFlashcardSinPausar('flashcard-etiquetas')">Ver Etiquetas</button>
+                            <button class="chalk-btn-small" onclick="mostrarPopUpYPausar('modal-pigmalion')">Ver Efecto Pigmalión</button>
+                            <button class="chalk-btn-small highlight" onclick="irAPantalla('intervencion-screen', 3)">Ir a Intervención ➔</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repisa de madera con tiza y borrador decorativo -->
+                <div class="chalk-tray">
+                    <div class="eraser"></div>
+                    <div class="chalk-piece white"></div>
+                    <div class="chalk-piece yellow"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =================================================================
+         PANTALLA 3: CIERRE INTERACTIVO (INTERVENCIÓN PSICOEDUCATIVA + APA)
+         ================================================================= -->
+    <section id="intervencion-screen" class="screen hidden">
+        <div class="intervention-container">
+            <div class="chalkboard-header-card">
+                <h2 class="chalk-title">Propuesta de Intervención Psicoeducativa</h2>
+                <p>Programa de Reestructuración de Expectativas Docentes y Fortalecimiento del Autoconcepto</p>
+            </div>
+
+            <!-- Mapa de ruta en 3 fases -->
+            <div class="roadmap-grid">
+                <div class="roadmap-card">
+                    <div class="step-Pin">FASE 1</div>
+                    <h3>Deconstrucción de Sesgos Institucionales</h3>
+                    <p><strong>Objetivo:</strong> Desmantelar el Error Fundamental de Atribución en el personal docente y administrativo.</p>
+                    <ul>
+                        <li>Talleres de toma de perspectiva y empatía contextual.</li>
+                        <li>Análisis de barreras estructurales vs. disposición del alumno.</li>
+                        <li>Eliminación de etiquetas verbales estigmatizantes en juntas escolares.</li>
+                    </ul>
+                </div>
+
+                <div class="roadmap-card">
+                    <div class="step-Pin">FASE 2</div>
+                    <h3>Activación del Efecto Pigmalión Positivo</h3>
+                    <p><strong>Objetivo:</strong> Transformar el clima de aula mediante altas expectativas pedagógicas y trato digno.</p>
+                    <ul>
+                        <li>Dignificación del espacio físico de aprendizaje junto a los estudiantes.</li>
+                        <li>Capacitación en retroalimentación positiva y refuerzo del esfuerzo.</li>
+                        <li>Integración no punitiva de las familias vulnerables a la escuela.</li>
+                    </ul>
+                </div>
+
+                <div class="roadmap-card">
+                    <div class="step-Pin">FASE 3</div>
+                    <h3>Acompañamiento Socioafectivo</h3>
+                    <p><strong>Objetivo:</strong> Reconstruir la autoestima académica y la autoeficacia en los niños.</p>
+                    <ul>
+                        <li>Dinámicas grupales de resignificación de identidad escolar.</li>
+                        <li>Evaluación pre-postest con escalas de clima socioemocional.</li>
+                        <li>Seguimiento de indicadores de asistencia, participación y vínculo.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Reflexión del Rol y Botón de Bibliografía APA 7 -->
+            <div class="closing-box">
+                <div class="rol-psicologo">
+                    <h3>🎓 Reflexión: El Rol del Psicólogo Educativo</h3>
+                    <p>Frente a contextos de alta vulnerabilidad, el psicólogo educativo no debe limitarse al diagnóstico individual del niño, sino intervenir sistémicamente sobre las creencias institucionales. Cuando cambiamos la mirada del adulto sobre el estudiante, transformamos su destino educativo.</p>
+                </div>
+                <div class="apa-trigger-box">
+                    <button class="btn-apa" onclick="abrirModalAPA()">📚 Ver Referencias Bibliográficas (APA 7.ª Ed.)</button>
+                    <button class="btn-volver-video" onclick="irAPantalla('video-screen', 2)">⬅ Volver al Video</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         VENTANAS EMERGENTES (POP-UPS Y FLASHCARDS SINCRONIZADAS)
+         ================================================================= -->
+
+    <!-- POP-UP 1: ERROR FUNDAMENTAL DE ATRIBUCIÓN (Pausa el video) -->
+    <div id="modal-atribucion" class="modal-overlay hidden">
+        <div class="notebook-modal">
+            <div class="spiral-binding"></div>
+            <span class="modal-tag">LENTE TEÓRICA • PSICOLOGÍA SOCIAL</span>
+            <h2>El Error Fundamental de Atribución (Ross, 1977)</h2>
+            <p>Tendencia a sobrevalorar las disposiciones internas o de personalidad de un individuo, subestimando el peso de los factores situacionales y contextuales.</p>
+            
+            <div class="comparison-grid">
+                <div class="comp-box bad">
+                    <h4>❌ Atribución de los Directivos (Sesgo)</h4>
+                    <p><em>"Vienen de la calle, no les importa estudiar, son indisciplinados por naturaleza."</em></p>
+                    <small>Culpan al niño y a su familia de su bajo rendimiento.</small>
+                </div>
+                <div class="comp-box good">
+                    <h4>✅ Realidad Situacional (Contexto)</h4>
+                    <p>Aula improvisada junto a las vías del tren, carencia de libros, pupitres rotos, hambre, ruido constante y abandono del distrito escolar.</p>
+                    <small>El comportamiento es una respuesta a un entorno hostil.</small>
+                </div>
+            </div>
+
+            <button class="btn-resume" onclick="cerrarModalYReanudar('modal-atribucion')">
+                Continuar viendo el análisis ▶
+            </button>
+        </div>
+    </div>
+
+    <!-- FLASHCARD LATERAL: ETIQUETAS SOCIALES (No pausa el video) -->
+    <div id="flashcard-etiquetas" class="sticky-flashcard hidden">
+        <div class="pin-icon">📌</div>
+        <button class="close-sticky" onclick="ocultarElemento('flashcard-etiquetas')">✖</button>
+        <h4>Alerta de Estigmatización</h4>
+        <p>Observa cómo las etiquetas institucionales (<strong>"niños del refugio"</strong>, <strong>"casos perdidos"</strong>) operan como barreras invisibles que justifican la negligencia de las autoridades antes de conocer a los alumnos.</p>
+    </div>
+
+    <!-- POP-UP 2: EFECTO PIGMALIÓN (Pausa el video) -->
+    <div id="modal-pigmalion" class="modal-overlay hidden">
+        <div class="notebook-modal">
+            <div class="spiral-binding"></div>
+            <span class="modal-tag">PROFECÍA AUTOCUMPLIDA • ROSENTHAL Y JACOBSON</span>
+            <h2>La Transformación mediante el Efecto Pigmalión</h2>
+            <p>El cambio de actitud de la maestra <strong>Stacey Bess</strong> rompe la profecía de fracaso impuesta por el sistema y activa un ciclo positivo de rendimiento:</p>
+            
+            <div class="cycle-steps">
+                <div class="cycle-item">
+                    <strong>1. Altas Expectativas:</strong> La maestra cree genuinamente en la capacidad de aprender de los niños.
+                </div>
+                <div class="cycle-item">
+                    <strong>2. Dignificación del Entorno:</strong> Limpia el aula, pinta, lleva libros propios y trata a las familias con respeto.
+                </div>
+                <div class="cycle-item">
+                    <strong>3. Respuesta del Estudiante:</strong> Los niños internalizan que son valiosos, elevan su autoestima y transforman su rendimiento escolar.
+                </div>
+            </div>
+
+            <button class="btn-resume" onclick="cerrarModalYReanudar('modal-pigmalion')">
+                Continuar viendo el análisis ▶
+            </button>
+        </div>
+    </div>
+
+    <!-- POP-UP 3: REFERENCIAS BIBLIOGRÁFICAS APA 7 -->
+    <div id="modal-apa" class="modal-overlay hidden">
+        <div class="notebook-modal apa-modal">
+            <h2>Referencias Bibliográficas (Normas APA 7.ª Edición)</h2>
+            <div class="apa-list">
+                <p class="apa-item">Bandura, A. (1987). <em>Pensamiento y acción: Fundamentos sociales</em>. Martínez Roca.</p>
+                <p class="apa-item">Bleckner, J. (Director). (2011). <em>Beyond the Blackboard</em> [Detrás de la pizarra] [Película]. Hallmark Hall of Fame Productions.</p>
+                <p class="apa-item">Mead, G. H. (1934). <em>Mind, self, and society: From the standpoint of a social behaviorist</em>. University of Chicago Press.</p>
+                <p class="apa-item">Rosenthal, R., & Jacobson, L. (1968). <em>Pygmalion in the classroom: Teacher expectation and pupils' intellectual development</em>. Holt, Rinehart & Winston.</p>
+                <p class="apa-item">Ross, L. (1977). The intuitive psychologist and his shortcomings: Distortions in the attribution process. En L. Berkowitz (Ed.), <em>Advances in experimental social psychology</em> (Vol. 10, pp. 173–220). Academic Press.</p>
+            </div>
+            <button class="btn-resume" onclick="ocultarElemento('modal-apa')">Cerrar Referencias</button>
+        </div>
+    </div>
+
+    <!-- Ruta al archivo JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
