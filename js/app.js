@@ -1,65 +1,102 @@
 // ============================================================================
-// CONFIGURACIÓN 1: ID DEL VIDEO DE YOUTUBE
-// Cuando subas tu video a YouTube (en modo Público u Oculto), copia solo el ID.
-// Ejemplo: Si el link es https://www.youtube.com/watch?v=M7lc1UVf-VE
-// El ID que debes pegar entre las comillas es: 'M7lc1UVf-VE'
+// CONFIGURACIÓN 1: ID DEL VIDEO PRINCIPAL DE YOUTUBE (PANTALLA 2)
+// Ejemplo: Si el link es https://www.youtube.com/watch?v=M7lc1UVf-VE -> 'M7lc1UVf-VE'
 // ============================================================================
-const YOUTUBE_VIDEO_ID = 'M7lc1UVf-VE'; // <-- REEMPLAZA ESTE ID CUANDO TENGAS TU VIDEO
+const YOUTUBE_VIDEO_ID = 'sjcNR-m5bUg'; // <-- REEMPLAZA ESTE ID CUANDO SUBAN SU VIDEO
 
 
 // ============================================================================
-// CONFIGURACIÓN 2: TIEMPOS EXACTOS DE DESPLIEGUE EN EL VIDEO (EN SEGUNDOS)
-// Recuerda convertir los minutos a segundos:
-// Ejemplo: Minuto 1:30 = 90 segundos | Minuto 3:00 = 180 segundos
+// CONFIGURACIÓN 2: MINUTOS/SEGUNDOS EXACTOS DONDE SALTAN LOS CLIPS Y APOYOS
+// Fórmula rápida: (Minutos * 60) + Segundos = segundoExacto
+// Ejemplo: Minuto 2:15 -> (2 * 60) + 15 = 135 segundos
 // ============================================================================
 const eventosDelVideo = [
     {
-        nombre: "Pop-up: Error Fundamental de Atribución",
-        segundoExacto: 10, // <-- CAMBIA AQUÍ EL SEGUNDO EXACTO (Ahorita sale a los 10 seg para que pruebes)
+        // APOYO MIEMBRO 1: Sale nota adhesiva con cita de Mead (No pausa el video)
+        nombre: "Miembro 1 - Flashcard George H. Mead",
+        segundoExacto: 31, // <-- CAMBIA AQUÍ EL SEGUNDO (Ej: 0:25)
+        mostrado: false,
+        accion: () => mostrarFlashcardSinPausar('flashcard-mead')
+    },
+    {
+        // APOYO MIEMBRO 2: Pausa el video y muestra el esquema de Lee Ross (1977)
+        nombre: "Miembro 2 - Esquema Error Fundamental de Atribución",
+        segundoExacto: 76, // <-- CAMBIA AQUÍ EL SEGUNDO (Ej: 1:35)
         mostrado: false,
         accion: () => mostrarPopUpYPausar('modal-atribucion')
     },
     {
-        nombre: "Flashcard lateral: Etiquetas Institucionales",
-        segundoExacto: 20, // <-- CAMBIA AQUÍ EL SEGUNDO EXACTO (Sale sin pausar el video)
+        // APOYO MIEMBRO 3: Pausa YouTube y reproduce el Clip 1 (assets/escena-autoridades.mp4)
+        nombre: "Miembro 3 - Clip Película: Directivos y Prejuicios",
+        segundoExacto: 120, // <-- CAMBIA AQUÍ EL SEGUNDO (Ej: 2:45)
         mostrado: false,
-        accion: () => mostrarFlashcardSinPausar('flashcard-etiquetas')
+        accion: () => mostrarClipPelicula('modal-clip-autoridades', 'video-clip-1')
     },
     {
-        nombre: "Pop-up: Efecto Pigmalión y Cambio de Actitud",
-        segundoExacto: 30, // <-- CAMBIA AQUÍ EL SEGUNDO EXACTO (Pausa el video y muestra el ciclo)
+        // APOYO MIEMBRO 4: Pausa el video y muestra el esquema de Rosenthal y Jacobson (1968)
+        nombre: "Miembro 4 - Esquema Efecto Pigmalión",
+        segundoExacto: 166, // <-- CAMBIA AQUÍ EL SEGUNDO (Ej: 4:00)
         mostrado: false,
         accion: () => mostrarPopUpYPausar('modal-pigmalion')
+    },
+    {
+        // APOYO MIEMBRO 5 (Parte A): Pausa YouTube y reproduce el Clip 2 (assets/escena-cambio.mp4)
+        nombre: "Miembro 5 - Clip Película: Maestra limpia el aula",
+        segundoExacto: 1000, // <-- CAMBIA AQUÍ EL SEGUNDO (Ej: 5:10)
+        mostrado: false,
+        accion: () => mostrarClipPelicula('modal-clip-cambio', 'video-clip-2')
+    },
+    {
+        // APOYO MIEMBRO 5 (Parte B): Sale nota adhesiva de Albert Bandura (No pausa el video)
+        nombre: "Miembro 5 - Flashcard Autoeficacia de Bandura",
+        segundoExacto: 1000, // <-- CAMBIA AQUÍ EL SEGUNDO (Ej: 5:35)
+        mostrado: false,
+        accion: () => mostrarFlashcardSinPausar('flashcard-bandura')
+    },
+    {
+        // APOYO MIEMBRO 6: Pausa el video y muestra las capturas Antes/Después del aula
+        nombre: "Miembro 6 - Capturas Antes y Después del Aula",
+        segundoExacto: 340, // <-- CAMBIA AQUÍ EL SEGUNDO (Ej: 6:30)
+        mostrado: false,
+        accion: () => mostrarPopUpYPausar('modal-capturas-aula')
     }
 ];
 
 
 // ============================================================================
-// CONFIGURACIÓN 3: DATOS DEL EXPEDIENTE INICIAL (LOS 7 INTEGRANTES)
+// CONFIGURACIÓN 3: PESTAÑAS DEL EXPEDIENTE INICIAL (PANTALLA 1)
 // ============================================================================
 const contenidoPestanas = {
     1: `
         <h3>📋 Equipo de Investigación - Grupo 2</h3>
         <p><strong>Rol asignado:</strong> Analistas de Sesgos y Atribuciones (Efecto Pigmalión).</p>
         <ul class="integrantes-grid">
-            <li>1. Kevin Andrés Chachalo Portilla</li>
-            <li>2. [Nombre Integrante 2]</li>
-            <li>3. [Nombre Integrante 3]</li>
-            <li>4. [Nombre Integrante 4]</li>
-            <li>5. [Nombre Integrante 5]</li>
-            <li>6. [Nombre Integrante 6]</li>
-            <li>7. [Nombre Integrante 7]</li>
+            <li>1. Burgos Nicole </li>
+            <li>2. Chachalo Kevin</li>
+            <li>3. Escobar Matias</li>
+            <li>4. Lara Karla</li>
+            <li>5. Lita Josué</li>
+            <li>6. Loza Andreina</li>
+            <li>7. Togán Damariz</li>
         </ul>
     `,
     2: `
         <h3>🏚️ Contexto General del Caso ("Escuela sin Nombre")</h3>
-        <p>La película <em>Detrás de la Pizarra</em> retrata el programa educativo de un refugio temporal para personas sin hogar. Los niños asisten a un aula improvisada junto a las vías del tren, marcada por el abandono institucional, la escasez extrema de materiales didácticos y constantes distractores ambientales.</p>
-        <p>Este escenario vulnera inicialmente tanto la autoestima de los menores como la disposición pedagógica de quienes llegan a enseñar allí.</p>
+        <div class="expediente-video-box">
+            <video id="video-contexto" controls preload="metadata">
+                <source src="assets/contexto.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+        </div>
     `,
     3: `
         <h3>🧠 Delimitación de la Problemática Psicosocial</h3>
-        <p>Nuestro análisis se centra en cómo las autoridades educativas y la sociedad justifican su negligencia mediante prejuicios cognitivos (<em>"vienen de la calle"</em>, <em>"no les importa estudiar"</em>).</p>
-        <p>Evaluaremos la interacción entre el <strong>Error Fundamental de Atribución</strong> (culpar al niño ignorando su entorno) y el <strong>Efecto Pigmalión</strong> (cómo el cambio de actitud y las altas expectativas de la maestra Stacey Bess transforman el rendimiento académico).</p>
+        <div class="expediente-video-box">
+            <video id="video-problematica" controls preload="metadata">
+                <source src="assets/problematica.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+        </div>
     `
 };
 
@@ -71,47 +108,41 @@ let player;
 let monitorInterval;
 const pestanasLeidas = new Set();
 
-// Inicializar la primera pestaña al abrir la página
 document.addEventListener('DOMContentLoaded', () => {
     leerPestana(1);
 });
 
-// Función para cambiar entre las 3 pestañas del expediente inicial
 function leerPestana(numero) {
-    // Actualizar contenido de la hoja rayada
+    document.querySelectorAll('.expediente-video-box video').forEach(vid => vid.pause());
     document.getElementById('tab-content-area').innerHTML = contenidoPestanas[numero];
 
-    // Actualizar estilo visual de los botones de pestaña
     document.querySelectorAll('.paper-tab').forEach(btn => btn.classList.remove('active'));
     document.getElementById(`tab-btn-${numero}`).classList.add('active');
 
-    // Registrar lectura única
     pestanasLeidas.add(numero);
     const totalLeidas = pestanasLeidas.size;
     document.getElementById('progreso-lectura').innerText = `Documentos revisados: ${totalLeidas} de 3`;
 
-    // Si ya revisó las 3 pestañas, desbloquear el botón de ir al video
     if (totalLeidas === 3) {
         document.getElementById('progreso-lectura').innerText = "✅ Expediente completo (3 de 3)";
         document.getElementById('btn-iniciar').classList.remove('hidden');
     }
 }
 
-// Navegación entre las 3 pantallas principales de la plataforma
 function irAPantalla(screenId, stepNum) {
+    document.querySelectorAll('video').forEach(vid => vid.pause());
+
     document.querySelectorAll('.screen').forEach(scr => scr.classList.add('hidden'));
     document.getElementById(screenId).classList.remove('hidden');
 
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById(`nav-step-${stepNum}`).classList.add('active');
 
-    // Si sale de la pantalla del video, pausar el reproductor por seguridad
     if (screenId !== 'video-screen' && player && typeof player.pauseVideo === 'function') {
         player.pauseVideo();
     }
 }
 
-// Botón que lleva del expediente directamente a reproducir el video
 function iniciarVideo() {
     irAPantalla('video-screen', 2);
     if (player && typeof player.playVideo === 'function') {
@@ -119,7 +150,6 @@ function iniciarVideo() {
     }
 }
 
-// Inicialización oficial de YouTube Iframe API
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: '100%',
@@ -135,7 +165,6 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// Monitorear cuando el video está en reproducción o cuando termina
 function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) {
         monitorInterval = setInterval(verificarTiempoVideo, 500);
@@ -143,13 +172,11 @@ function onPlayerStateChange(event) {
         clearInterval(monitorInterval);
     }
 
-    // Al finalizar el video de 10 minutos, pasar automáticamente a la Propuesta de Intervención
     if (event.data === YT.PlayerState.ENDED) {
         irAPantalla('intervencion-screen', 3);
     }
 }
 
-// Comprobar el segundo actual y disparar pop-ups o flashcards
 function verificarTiempoVideo() {
     if (!player || typeof player.getCurrentTime !== 'function') return;
 
@@ -157,7 +184,6 @@ function verificarTiempoVideo() {
     actualizarRelojVisual(segundoActual);
 
     eventosDelVideo.forEach(evento => {
-        // Rango de 2 segundos de tolerancia para garantizar que siempre se active
         if (segundoActual >= evento.segundoExacto && segundoActual <= evento.segundoExacto + 1 && !evento.mostrado) {
             evento.mostrado = true;
             evento.accion();
@@ -165,14 +191,45 @@ function verificarTiempoVideo() {
     });
 }
 
-// Formatear segundos a MM:SS en la pizarra
 function actualizarRelojVisual(segundosTotales) {
     const min = String(Math.floor(segundosTotales / 60)).padStart(2, '0');
     const seg = String(segundosTotales % 60).padStart(2, '0');
     document.getElementById('reloj-video').innerText = `${min}:${seg}`;
 }
 
-// Mostrar modal y pausar el video automáticamente
+// ============================================================================
+// FUNCIONES PARA ABRIR Y CERRAR CLIPS DE PELÍCULA, MODALES Y FLASHCARDS
+// ============================================================================
+
+// Pausa YouTube, abre el modal del clip de película y lo reproduce automáticamente
+function mostrarClipPelicula(modalId, videoElementId) {
+    if (player && typeof player.pauseVideo === 'function') {
+        player.pauseVideo();
+    }
+    document.getElementById(modalId).classList.remove('hidden');
+    
+    const clipVideo = document.getElementById(videoElementId);
+    if (clipVideo) {
+        clipVideo.currentTime = 0;
+        clipVideo.play().catch(() => {
+            // Si el navegador requiere clic manual, el usuario tiene los controles listos
+        });
+    }
+}
+
+// Detiene el clip de película, cierra el modal y reanuda el video de YouTube
+function cerrarClipYReanudar(modalId, videoElementId) {
+    const clipVideo = document.getElementById(videoElementId);
+    if (clipVideo) {
+        clipVideo.pause();
+    }
+    document.getElementById(modalId).classList.add('hidden');
+    
+    if (player && typeof player.playVideo === 'function') {
+        player.playVideo();
+    }
+}
+
 function mostrarPopUpYPausar(modalId) {
     if (player && typeof player.pauseVideo === 'function') {
         player.pauseVideo();
@@ -180,7 +237,6 @@ function mostrarPopUpYPausar(modalId) {
     document.getElementById(modalId).classList.remove('hidden');
 }
 
-// Cerrar modal y reanudar la reproducción del video
 function cerrarModalYReanudar(modalId) {
     document.getElementById(modalId).classList.add('hidden');
     if (player && typeof player.playVideo === 'function') {
@@ -188,17 +244,48 @@ function cerrarModalYReanudar(modalId) {
     }
 }
 
-// Mostrar flashcard estilo nota adhesiva sin pausar el video
 function mostrarFlashcardSinPausar(cardId) {
+    // Oculta otras flashcards abiertas antes de mostrar la nueva
+    document.querySelectorAll('.sticky-flashcard').forEach(card => card.classList.add('hidden'));
     document.getElementById(cardId).classList.remove('hidden');
 }
 
-// Ocultar cualquier ventana emergente sin alterar el estado del video
 function ocultarElemento(id) {
     document.getElementById(id).classList.add('hidden');
 }
 
-// Mostrar el modal de referencias APA 7
 function abrirModalAPA() {
     document.getElementById('modal-apa').classList.remove('hidden');
+}
+
+// ============================================================================
+// DESBLOQUEO SECUENCIAL EN PROPUESTA DE INTERVENCIÓN (PANTALLA 3)
+// ============================================================================
+function desbloquearFase(numeroFase) {
+    const card = document.getElementById(`card-fase-${numeroFase}`);
+    const lockOverlay = document.getElementById(`lock-fase-${numeroFase}`);
+    const statusBadge = document.getElementById(`status-fase-${numeroFase}`);
+    const statusAnterior = document.getElementById(`status-fase-${numeroFase - 1}`);
+
+    if (statusAnterior) statusAnterior.innerText = "✅ Completado";
+
+    if (card && card.classList.contains('locked')) {
+        card.classList.remove('locked');
+        if (lockOverlay) lockOverlay.classList.add('hidden');
+        if (statusBadge) statusBadge.innerText = "🔓 Desbloqueado";
+    }
+}
+
+function desbloquearReflexion() {
+    const statusFase3 = document.getElementById('status-fase-3');
+    if (statusFase3) statusFase3.innerText = "✅ Completado";
+
+    const boxReflexion = document.getElementById('box-reflexion');
+    const lockReflexion = document.getElementById('lock-reflexion');
+
+    if (boxReflexion && boxReflexion.classList.contains('locked')) {
+        boxReflexion.classList.remove('locked');
+        if (lockReflexion) lockReflexion.classList.add('hidden');
+        boxReflexion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 }
